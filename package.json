@@ -1,0 +1,25 @@
+{
+  "name": "touchdown",
+  "version": "1.0.0",
+  "description": "events for mouse and touch in one",
+  "main": "touchdown.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:NHQ/touchdown.git"
+  },
+  "keywords": [
+    "touch",
+    "events",
+    "browserify",
+    "mouse",
+    "events",
+    "ipad",
+    "uxer"
+  ],
+  "author": "johnnyscript.us",
+  "license": "BLT",
+  "readmeFilename": "README.md"
+}
