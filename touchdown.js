@@ -1,5 +1,4 @@
 var touchy = require('./touchy.js')
-,   findPos = require('./findPosition.js')
 ,   uuid = require('node-uuid')
 ;
 
