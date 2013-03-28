@@ -47,7 +47,9 @@ function touchtest(hand, finger){
 
   finger.on('start', function(point){
 	
-    var el = search(document.elementFromPoint(point.x, point.y));
+		var element = document.elementFromPoint(point.x, point.y);
+			
+    var el = search(element);
 
     if(el){
 	
@@ -124,9 +126,9 @@ function search(el){
 
     if(!el) return false;
   
-    var x = window._touch.elements.reduce(function(val, i){
+    var x = window._touch.elements.reduce(function(val, i){	
 
-      if(i.id == el.id && i.touch){
+      if(i.touch_id == el.touch_id && i.touch){
 
         val = i
 
