@@ -76,9 +76,11 @@ function touchtest(hand, finger){
     if(this.is){
 	
 	
-      var evt = new CustomEvent('vector', { cancelable: true, bubbles: false, detail : point});
+      var evt = new CustomEvent('deltavector', { cancelable: true, bubbles: false, detail : point});
 
-			evt.detail.vector = [point.x - lastPoint[0], point.y - lastPoint[1]]
+			evt.detail.delta = [point.x - lastPoint[0], point.y - lastPoint[1]];
+
+			evt.detail.vector = [point.x, point.y];
 
 			evt.detail.allPoints = allPoints;
 		
@@ -100,15 +102,17 @@ function touchtest(hand, finger){
 
       var evt = new CustomEvent('liftoff', { cancelable: true, bubbles: false, detail : point});
 
-			evt.detail.vector = [point.x - lastPoint[0], point.y - lastPoint[1]]
-	
+			evt.detail.delta = [point.x - lastPoint[0], point.y - lastPoint[1]];
+
+			evt.detail.vector = [point.x, point.y];
+
 			evt.detail.allPoints = allPoints;
-
+		
 			evt.detail.lastPoint = lastPoint.splice(0)
-
-		  lastPoint = [point.x, point.y]
-
-		  allPoints.push(lastPoint.slice(0))
+						
+			lastPoint = [point.x, point.y]
+		
+		  allPoints.push(lastPoint.slice())
 
       this.el.dispatchEvent(evt);
 

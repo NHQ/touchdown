@@ -382,6 +382,7 @@ TouchController.prototype.start = function () {
     }
     this.running = true;
 		if(Modernizr.touch){
+		    document.addEventListener('touchmove', function(e){e.preventDefault()})
 		  bind(this.elem, 'touchstart', this.touchstart() );
 	    bind(this.elem, 'touchmove' , this.touchmove()  );
 	    bind(this.elem, 'touchend'  , this.touchend()   );	
