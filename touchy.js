@@ -377,21 +377,22 @@ function TouchController (elem, handleMouse, settings) {
 
 /* Start watching element for touch events */
 TouchController.prototype.start = function () {
+
     if (this.running) {
     	return;
     }
     this.running = true;
-		if(Modernizr.touch){
-		    document.addEventListener('touchmove', function(e){e.preventDefault()})
-		  bind(this.elem, 'touchstart', this.touchstart() );
-	    bind(this.elem, 'touchmove' , this.touchmove()  );
-	    bind(this.elem, 'touchend'  , this.touchend()   );	
-		}
-		else{
-		  bind(this.elem, 'mousedown' , this.mousedown() );
-	    bind(this.elem, 'mouseup'   , this.mouseup()   );
-	    bind(this.elem, 'mousemove' , this.mousemove() );	
-		}
+    if(Modernizr.touch){
+	bind(this.elem, 'touchstart', this.touchstart() );
+	bind(this.elem, 'touchmove' , this.touchmove()  );
+	bind(this.elem, 'touchend'  , this.touchend()   );	
+	bind(window, 'touchmove', function(e){e.preventDefault()});
+    }
+    else{
+	bind(this.elem, 'mousedown' , this.mousedown() );
+	bind(this.elem, 'mouseup'   , this.mouseup()   );
+	bind(this.elem, 'mousemove' , this.mousemove() );	
+    }
 };
 
 TouchController.prototype.handleMouse = function(x){
