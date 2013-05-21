@@ -28,6 +28,8 @@ touch.prototype.start = touch.prototype.listen = function(el){
 
     el.touch = 1;
 
+		return el
+
 };
 
 touch.prototype.register = function(el){
@@ -37,6 +39,8 @@ touch.prototype.register = function(el){
     this.elements.push(el);
 
     el.touch = 0; // needs to be started
+
+		return el
 
 };
 
@@ -153,11 +157,15 @@ touch.prototype.pause = function(el){
 
   el.touch = 0
 
+  return el
+
 };
 
 touch.prototype.resume = function(el){
 
   el.touch = 1
+
+	return el
 
 };
 
@@ -166,6 +174,8 @@ touch.prototype.end = function(el){
   delete el.touch
 
   delete el.touch_id
+
+	return el
 
 };
 

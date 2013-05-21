@@ -2,7 +2,7 @@
 
 This module uses a modified [Touchy.js](https://github.com/jairajs89/Touchy.js) to create normalized events for touch and mouse. The focus is on touch events, and this module is for building user interfaces for that paradigm.
 
-Currently only three events are supported, "touchdown", "vector", and "liftoff", which are analogous to touchstart, touchmove, and touchend, as well as mousedown, mousedrag, and mouseup. A hover event may added, but that is a mouse-only event until the physical computing space gets a little more intimate. Until then, use [mouse-around](https://github.com/NHQ/mousearound)
+Currently only three events are supported, "touchdown", "deltavector", and "liftoff", which are analogous to touchstart, touchmove, and touchend, as well as mousedown, mousedrag, and mouseup. A hover event may added, but that is a mouse-only event until the physical computing space gets a little more intimate. Until then, use [mouse-around](https://github.com/NHQ/mousearound)
 
 ```
 npm install touchdown
@@ -19,7 +19,7 @@ event.start(el);
 
 // element is now registered for three events, so add listeners:
 el.addEventListener('touchdown', touchdown)
-el.addEventListener('vector', vectorChange)
+el.addEventListener('deltavector', vectorChange)
 el.addEventListener('liftoff', liftoff)
 
 function touchdown(e){
