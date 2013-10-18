@@ -10,6 +10,9 @@
     "type": "git",
     "url": "git@github.com:NHQ/touchdown.git"
   },
+  "dependencies" : {
+	"node-uuid" : ""
+  },
   "keywords": [
     "touch",
     "events",

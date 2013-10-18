@@ -57,7 +57,7 @@ function touchtest(hand, finger){
 
     if(el){
 	
-		  lastPoint = [point.x, point.y]
+		  lastPoint = [point.x, point.y, point.time]
 		
 		  allPoints.push(lastPoint.slice(0))
 
