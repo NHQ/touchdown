@@ -1,5 +1,6 @@
 var touchy = require('./touchy.js')
 ,   uuid = require('node-uuid')
+,   merge = require('utils-merge')
 ;
 
 module.exports = (function(){
@@ -49,6 +50,8 @@ function touchtest(hand, finger){
 	
 	var lastPoint = [], allPoints = [];
 
+  var lastOffsetPoint = [], allOffsetPoints = [];
+
   finger.on('start', function(point){
 	
 		var element = document.elementFromPoint(point.x, point.y);
@@ -57,9 +60,17 @@ function touchtest(hand, finger){
 
     if(el){
 	
-		  lastPoint = [point.x, point.y, point.time]
-		
+      merge(point, point.e)
+
+		  lastPoint[0] = point.x
+      lastPoint[1] = point.y
+      lastPoint[2] = point.time
+		  
+      lastOffsetPoint[0] = point.offsetX
+      lastOffsetPoint[1] = point.offsetY
+
 		  allPoints.push(lastPoint.slice(0))
+      allOffsetPoints.push(lastOffsetPoint.slice(0))
 
       this.is = true;
 
@@ -78,22 +89,35 @@ function touchtest(hand, finger){
   finger.on('move', function(point){
 
     if(this.is){
-	
+
+      merge(point, point.e)
 	
       var evt = new CustomEvent('deltavector', { cancelable: true, bubbles: false, detail : point});
 
 			evt.detail.delta = [point.x - lastPoint[0], point.y - lastPoint[1]];
 
+      evt.detail.angle = Math.atan2(evt.detail.delta[0], evt.detail.delta[1])
+
 			evt.detail.vector = [point.x, point.y];
 
 			evt.detail.allPoints = allPoints;
-		
-			evt.detail.lastPoint = lastPoint.splice(0)
-						
-			lastPoint = [point.x, point.y]
-		
-		  allPoints.push(lastPoint.slice())
+      
+      evt.detail.lastOffsetPoint = lastOffsetPoint.slice(0)
 
+			evt.detail.lastPoint = lastPoint.splice(0)
+      
+      evt.detail.allOffsetPoints = allOffsetPoints
+
+      lastPoint[0] = point.x
+      lastPoint[1] = point.y
+      lastPoint[2] = point.time
+		  
+      lastOffsetPoint[0] = point.offsetX
+      lastOffsetPoint[1] = point.offsetY
+
+		  allPoints.push(lastPoint.slice(0))
+      allOffsetPoints.push(lastOffsetPoint.slice(0))
+		
       this.el.dispatchEvent(evt);
 
     }
@@ -104,20 +128,34 @@ function touchtest(hand, finger){
  
     if(this.is){
 
+      merge(point, point.e)
+
       var evt = new CustomEvent('liftoff', { cancelable: true, bubbles: false, detail : point});
 
 			evt.detail.delta = [point.x - lastPoint[0], point.y - lastPoint[1]];
 
-			evt.detail.vector = [point.x, point.y];
+      evt.detail.angle = Math.atan2(evt.detail.delta[0], evt.detail.delta[1])
+
+      evt.detail.vector = [point.x, point.y];
 
 			evt.detail.allPoints = allPoints;
 		
 			evt.detail.lastPoint = lastPoint.splice(0)
-						
-			lastPoint = [point.x, point.y]
 		
-		  allPoints.push(lastPoint.slice())
+      evt.detail.allOffsetPoints = allOffsetPoints
 
+      evt.detail.lastOffsetPoint = lastOffsetPoint.slice(0)
+
+      lastPoint[0] = point.x
+      lastPoint[1] = point.y
+      lastPoint[2] = point.time
+		  
+      lastOffsetPoint[0] = point.offsetX
+      lastOffsetPoint[1] = point.offsetY
+
+		  allPoints.push(lastPoint.slice(0))
+      allOffsetPoints.push(lastOffsetPoint.slice(0))
+		
       this.el.dispatchEvent(evt);
 
     }
@@ -186,3 +224,5 @@ touch.prototype.handleMouse = function(x){
   this.touchy.handleMouse(x);
 
 };
+
+
