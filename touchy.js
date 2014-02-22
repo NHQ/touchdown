@@ -308,7 +308,7 @@ Hand.prototype.get = function (id) {
 function domTouchToObj (touches, time, e) {
     return map(touches, function (touch) {
 	return {
-	    e: e,
+	    e: touches,
 	    id: touch.identifier,
 	    x: touch.pageX,
 	    y: touch.pageY,
@@ -431,7 +431,8 @@ TouchController.prototype.touchstart = function () {
     if ( !this._touchstart ) {
 	var self = this;
 	this._touchstart = function (e) {
-	    var touches = domTouchToObj(e.touches, e.timeStamp),
+      console.log(e)
+      var touches = domTouchToObj(e.touches, e.timeStamp),
 	    changedTouches = domTouchToObj(e.changedTouches, e.timeStamp, e);
 
 	    self.mainHandStart(changedTouches);
