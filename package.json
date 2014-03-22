@@ -11,7 +11,8 @@
     "url": "git@github.com:NHQ/touchdown.git"
   },
   "dependencies": {
-    "node-uuid": ""
+    "node-uuid": "",
+    "utils-merge":""
   },
   "keywords": [
     "touch",
