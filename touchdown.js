@@ -54,8 +54,8 @@ function touchtest(hand, finger){
 
   finger.on('start', function(point){
 	
-		var element = document.elementFromPoint(point.x, point.y);
-			
+		var element = document.elementFromPoint(point.x - window.scrollX, point.y - window.scrollY);
+    
     var el = search(element);
 
     if(el){
