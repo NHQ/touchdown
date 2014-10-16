@@ -59,13 +59,12 @@ function touchtest(hand, finger){
     var el = search(element);
 
     if(el){
-      
+      if(!point.offsetX){
+        point.offsetX = point.x - point.e.target.offsetLeft
+        point.offsetY = point.y - point.e.target.offsetTop
+      }
       merge(point, point.e)
 
-      if(!point.offsetX){
-        point.offsetX = point.x - point.e[0].target.offsetLeft
-        point.offsetY = point.y - point.e[0].target.offsetTop
-      }
 		  
       lastPoint[0] = point.x
       lastPoint[1] = point.y
@@ -95,12 +94,18 @@ function touchtest(hand, finger){
 
     if(this.is){
    
+      if(!point.offsetX){
+        point.offsetX = point.x - point.e.target.offsetLeft
+        point.offsetY = point.y - point.e.target.offsetTop
+      }
 
       merge(point, point.e)
-      if(!point.offsetX){
+      /*
+        if(!point.offsetX){
         point.offsetX = point.x - point.e[0].target.offsetLeft
         point.offsetY = point.y - point.e[0].target.offsetTop
       }
+      */
 	
       var evt = new CustomEvent('deltavector', { cancelable: true, bubbles: false, detail : point});
 
@@ -139,12 +144,17 @@ function touchtest(hand, finger){
     if(this.is){
 
       
+      if(!point.offsetX){
+        point.offsetX = point.x - point.e.target.offsetLeft
+        point.offsetY = point.y - point.e.target.offsetTop
+      }
       merge(point, point.e)
-
+/*
       if(!point.offsetX){
         point.offsetX = point.x - point.e[0].target.offsetLeft
         point.offsetY = point.y - point.e[0].target.offsetTop
       }
+*/
       var evt = new CustomEvent('liftoff', { cancelable: true, bubbles: false, detail : point});
 
 			evt.detail.delta = [point.x - lastPoint[0], point.y - lastPoint[1]];
